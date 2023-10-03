@@ -1,0 +1,4 @@
+/node_modules
+/.vent
+.env
+dev.db
