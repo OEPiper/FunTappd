@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, request
-from app.models import Venue, User, db
+from app.models import Venue, User, db, Beer
 from ..forms import VenueForm
 
 venue_bp = Blueprint('venue', __name__)
@@ -58,3 +58,14 @@ def delete_venue(id):
     db.session.delete(venue_to_remove)
     db.session.commit()
     return "Venue has been removed"
+
+@venue_bp.route('/<int:id>/beers')
+def venue_beers(id):
+    beers = Beer.query.filter_by(venue_id = id).all()
+    if beers is None:
+        return "No Beers Found", 404
+    beer_list = []
+    for beer in beers:
+        beer_dict = beer.to_dict()
+        beer_list.append(beer_dict)
+    return {"beers": beer_list}
