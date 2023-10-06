@@ -1,0 +1,21 @@
+.landing {
+    background: linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),url('https://assets.untappd.com/assets/custom/homepage/images/beer-bg-sm.jpg');
+    color: white;
+    height: fit-content;
+    background-size: cover;
+    background-position: center top;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    height: 300px;
+    width: 300px;
+}
+
+.account-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
