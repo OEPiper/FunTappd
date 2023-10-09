@@ -6,7 +6,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
-import VenuesShow from "./components/VenuesShow";
+import VenuesIndex from "./components/VenuesIndex";
+import VenueShow from "./components/VenueShow";
+import NewVenue from "./components/CreateVenue";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,9 +31,11 @@ function App() {
           <Route exact path="/">
             <LandingPage/>
           </Route>
-            <VenuesShow/>
           <Route exact path='/home'>
-
+            <VenuesIndex/>
+          </Route>
+          <Route exact path='/venues/:venueId'>
+            <VenueShow/>
           </Route>
         </Switch>
       )}

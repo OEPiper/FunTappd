@@ -11,7 +11,7 @@ def all_venues():
     for venue in all_venues:
         venue_dict = venue.to_dict()
         venue_list.append(venue_dict)
-    return {"venues": venue_list}
+    return {"Venues": venue_list}
 
 @venue_bp.route('/<int:id>')
 def venue_details(id):
