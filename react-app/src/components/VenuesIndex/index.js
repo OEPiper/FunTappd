@@ -7,13 +7,14 @@ import NewVenue from "../CreateVenue";
 
 function VenuesIndex(){
     const allVenues = useSelector((state) => (state.venue ? state.venue : []));
+    const sessionUser = useSelector((state) => (state.session.user))
     const venues = Object.values(allVenues)
     const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
         dispatch(loadVenues());
-    }, [dispatch])
+    }, [dispatch, venues.length])
     if(!venues.length){
         return null
     }
@@ -30,7 +31,9 @@ function VenuesIndex(){
                     </div>
                 ))}
             </ul>
+            {sessionUser &&
             <OpenModalButton buttonText={'Create a Venue'} modalComponent={<NewVenue type='Create a Venue'/>} />
+            }
         </div>
     )
 }

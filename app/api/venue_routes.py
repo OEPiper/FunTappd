@@ -20,7 +20,7 @@ def venue_details(id):
         return "Venue not found", 404
     return venue.to_dict()
 
-@venue_bp.route('/', methods=['POST'])
+@venue_bp.route('/new', methods=['POST'])
 def create_venue():
     form = VenueForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -35,7 +35,7 @@ def create_venue():
         return new_venue.to_dict()
     return {'error'}
 
-@venue_bp.route('/<int:id>', methods=['PUT'])
+@venue_bp.route('/<int:id>/update', methods=['PUT'])
 def update_venue(id):
     venue_to_update = Venue.query.get(id)
     if venue_to_update is None:
@@ -50,7 +50,7 @@ def update_venue(id):
     db.session.commit()
     return venue_to_update.to_dict()
 
-@venue_bp.route('/<int:id>', methods=['DELETE'])
+@venue_bp.route('/<int:id>/delete', methods=['DELETE'])
 def delete_venue(id):
     venue_to_remove = Venue.query.get(id)
     if venue_to_remove is None:
@@ -68,4 +68,4 @@ def venue_beers(id):
     for beer in beers:
         beer_dict = beer.to_dict()
         beer_list.append(beer_dict)
-    return {"beers": beer_list}
+    return {"Beers": beer_list}

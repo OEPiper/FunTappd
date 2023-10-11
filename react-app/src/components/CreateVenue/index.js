@@ -1,16 +1,40 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { createVenue, updateVenue, venueDetails } from "../../store/venue"
+import { useModal } from "../../context/Modal"
 
 
-const NewVenue = ({spot, type}) =>{
+const NewVenue = ({venue, type}) =>{
     const history = useHistory()
-    const [name, setName] = useState(spot?.name)
-    const [location, setLocation] = useState(spot?.location)
+    const dispatch = useDispatch()
+    const {closeModal} = useModal()
+    const sessionUser = useSelector(state => state.session.user)
+    const [name, setName] = useState(venue?.name)
+    const [location, setLocation] = useState(venue?.location)
+    const [state, setState] = useState(false)
+    venue = {
+        ...venue,
+        name,
+        location,
+        user_id: sessionUser.id
+    }
     const handleSubmit = async(e) => {
         e.preventDefault()
-        history.push('/home')
+        if(type === 'Create a Venue'){
+        const newVenue = await dispatch(createVenue(venue))
+        venue = newVenue
+        }else if(type === 'Update Venue'){
+            const updatedVenue = await dispatch(updateVenue(venue))
+            // history.push(`/home`)
+        }
+        await setState((prev) => !prev)
+        return(closeModal())
     }
+    useEffect(() =>{
+        dispatch(venueDetails(venue.id))
+    },[dispatch, state])
+
     let submitText
     if(type === 'Create a Venue'){
       submitText = 'Create Venue'
@@ -31,7 +55,7 @@ const NewVenue = ({spot, type}) =>{
                 />
             </label>
             <label>
-                Name
+                Location
                 <input 
                 type='text'
                 placeholder="location"
