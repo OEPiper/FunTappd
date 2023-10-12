@@ -1,0 +1,46 @@
+.index{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.venue-list{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.venue-list ul{
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+
+.venue-card{
+    border: solid 1px black;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-options{
+    border-left: solid 5px #ffc000;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-card{
+    border: solid 1px black;
+    width: 175px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.profile-card p{
+    margin: 5px auto;
+}

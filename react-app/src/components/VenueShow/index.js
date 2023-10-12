@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { venueDetails } from "../../store/venue";
 import OpenModalButton from "../OpenModalButton";
 import NewVenue from "../CreateVenue";
 import DeleteVenueModal from "../DeleteVenue";
 import { loadBeers } from "../../store/beer";
 import NewBeer from "../CreateBeer";
+import { logout } from "../../store/session";
 
 const VenueShow = () => {
     const {venueId} = useParams()
+    const history = useHistory()
     const venue = useSelector((state) => state.venue ? state.venue[venueId] : null)
     const allBeers = useSelector((state) => state.beer ? state.beer : [])
     const beers = Object.values(allBeers)
@@ -19,6 +21,11 @@ const VenueShow = () => {
         dispatch(venueDetails(venueId))
         dispatch(loadBeers(venueId))
     }, [dispatch, venueId, beers.length])
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+        history.push('/')
+      };
     let beerText = 'Beers'
     if(beers.length === 1){
          beerText = 'Beer'
@@ -27,21 +34,30 @@ const VenueShow = () => {
         return null
     }
     return (
-        <div>
+        <div className="index">
+            <div>
+
             <h2>{venue.name}</h2>
+            <p>{venue.location}</p>
             <p>{beers.length} {beerText}</p>
             <ul>
             {beers.map((beer) => (
-                    <div>
+                <div>
                         <Link exact to={`/beers/${beer.id}`} venue={venue}>
                         <p>{beer.name}</p>
-                        <p>ABV {parseFloat(beer.abv)}%</p>
                         </Link>
                        
                         
                     </div>
                 ))}
             </ul>
+            </div>
+            <div className="profile-options">
+            <div className="profile-card">
+                <p>Hello, {sessionUser.username}</p>
+                <p>{sessionUser.email}</p>
+                <button onClick={handleLogout}>Log Out</button>
+            </div>
             {sessionUser.id === venue.user_id &&
             <OpenModalButton buttonText={'Add a Beer'} modalComponent={<NewBeer type='Create a Beer' venue={venue}/>} />
             }
@@ -50,7 +66,8 @@ const VenueShow = () => {
             }
             {sessionUser.id === venue.user_id &&
             <OpenModalButton buttonText={'Delete Venue'} modalComponent={<DeleteVenueModal venue={venue}/>} />
-            }  
+            }
+            </div>
         </div>
     )
 }
