@@ -24,6 +24,17 @@ function LoginFormModal() {
     history.push('/home')
   };
 
+  const demoUser = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    } else {
+        closeModal()
+    }
+    history.push('/home')
+  };
+
   return (
     <>
       <h1>Log In</h1>
@@ -52,6 +63,9 @@ function LoginFormModal() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button onClick={demoUser}>
+          Demo User
+        </button>
       </form>
     </>
   );
