@@ -1,5 +1,6 @@
 export const LOAD_BEERS = 'beers/LOAD_BEERS'
-export const RECIEVE_BEER = 'beers/RECIEVE_BEERS'
+export const RECIEVE_BEER = 'beers/RECIEVE_BEER'
+export const UPDATE_BEER = 'beers/UPDATE_BEER'
 
 export const actionLoadBeers = (beers) => {
     return {
@@ -15,6 +16,13 @@ export const actionRecieveBeer = (beer) => {
     }
 }
 
+export const actionUpdateBeer = (beer) => {
+    return{
+        type: UPDATE_BEER,
+        beer
+    }
+}
+
 export const loadBeers = (venueId) => async(dispatch) =>{
     const res = await fetch(`/api/venues/${venueId}/beers`)
     if(res.ok){
@@ -23,6 +31,29 @@ export const loadBeers = (venueId) => async(dispatch) =>{
         return beers
     }else{
         const errors = await res.json()
+        return errors
+    }
+}
+
+export const loadAllBeers = (data) => async(dispatch) =>{
+    const res = await fetch('/api/beers')
+    if(res.ok){
+        const beers = await res.json()
+        dispatch(actionLoadBeers(beers))
+        return beers
+    }else{
+        const errors = await res.json()
+        return errors
+    }
+}
+
+export const beerDetails = (beerId) => async(dispatch) => {
+    const res = await fetch(`/api/beers/${beerId}`)
+    if(res.ok){
+        const beer = await res.json();
+        dispatch(actionRecieveBeer(beer))
+    }else{
+        const errors = res.json()
         return errors
     }
 }
@@ -44,6 +75,22 @@ export const createBeer = (data) => async(dispatch) =>{
         const newBeer = await res.json();
         dispatch(actionRecieveBeer(newBeer))
         return newBeer
+    }else{
+        const errors = await res.json()
+        return errors.errors
+    }
+}
+
+export const updateBeer = (data) => async(dispatch) => {
+    const res = await fetch(`/api/beers/${data.id}/update`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+    if(res.ok){
+        const updatedBeer = await res.json();
+        dispatch(actionUpdateBeer(updatedBeer))
+        return updatedBeer
     }else{
         const errors = await res.json()
         return errors.errors

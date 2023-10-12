@@ -37,7 +37,7 @@ def create_beer():
         return new_beer.to_dict()
     return {'error'}
 
-@beer_bp.route('/<int:id>', methods=["PUT"])
+@beer_bp.route('/<int:id>/update', methods=["PUT"])
 def update_beer(id):
     beer_to_update = Beer.query.get(id)
     if beer_to_update is None:

@@ -9,6 +9,7 @@ import LandingPage from "./components/LandingPage";
 import VenuesIndex from "./components/VenuesIndex";
 import VenueShow from "./components/VenueShow";
 import NewVenue from "./components/CreateVenue";
+import BeerShow from "./components/BeerShow";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route exact path='/venues/:venueId'>
             <VenueShow/>
+          </Route>
+          <Route exact path='/beers/:beerId'>
+            <BeerShow/>
           </Route>
         </Switch>
       )}

@@ -33,9 +33,10 @@ const VenueShow = () => {
             <ul>
             {beers.map((beer) => (
                     <div>
-                        
+                        <Link exact to={`/beers/${beer.id}`} venue={venue}>
                         <p>{beer.name}</p>
                         <p>ABV {parseFloat(beer.abv)}%</p>
+                        </Link>
                        
                         
                     </div>

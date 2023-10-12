@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { createBeer, loadBeers } from "../../store/beer"
+import { createBeer, beerDetails, loadBeers, updateBeer } from "../../store/beer"
 import { useModal } from "../../context/Modal"
+import { loadVenues } from "../../store/venue"
 
 const NewBeer = ({venue, beer, type}) => {
     const history = useHistory()
@@ -12,29 +13,42 @@ const NewBeer = ({venue, beer, type}) => {
     const [name, setName] = useState(beer?.name)
     const [abv, setAbv] = useState(beer?.abv)
     const [ibu, setIbu] = useState(beer?.ibu)
+    const [venue_id, setVenue_id] = useState(beer?.venue_id)
     const [state, setState] = useState(false)
-    beer = {
-        ...beer,
-        name,
-        abv,
-        ibu,
-        user_id: sessionUser.id,
-        venue_id: venue.id
-    }
     const handleSubmit = async(e) => {
         e.preventDefault()
         if(type === 'Create a Beer'){
-        const newVenue = await dispatch(createBeer(beer))
-        venue = newVenue
+            beer = {
+                ...beer,
+                name,
+                abv,
+                ibu,
+                user_id: sessionUser.id,
+                venue_id: venue.id
+            }
+            const newVenue = await dispatch(createBeer(beer))
+            venue = newVenue
         }else if(type === 'Update Beer'){
-            // const updatedVenue = await dispatch(updateVenue(venue))
-            // history.push(`/home`)
+            beer = {
+                ...beer,
+                name,
+                abv,
+                ibu,
+                user_id: sessionUser.id,
+            }
+            const updatedBeer = await dispatch(updateBeer(beer))
+            
         }
         await setState((prev) => !prev)
         return(closeModal())
     }
     useEffect(() =>{
-        dispatch(loadBeers(venue.id))
+        if(type === 'Create a beer'){
+            dispatch(loadBeers(venue.id))
+        } 
+        if(type === 'Update Beer'){
+            dispatch(beerDetails(beer.id))
+        }
     },[dispatch, state])
 
     let submitText
@@ -60,7 +74,7 @@ const NewBeer = ({venue, beer, type}) => {
                 <input 
                 type='number'
                 placeholder="ABV"
-                value={abv}
+                value={parseFloat(abv)}
                 onChange={(e) => setAbv(e.target.value)}
                 />
             </label>
