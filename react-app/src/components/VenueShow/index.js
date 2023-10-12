@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import NewVenue from "../CreateVenue";
 import DeleteVenueModal from "../DeleteVenue";
 import { loadBeers } from "../../store/beer";
+import NewBeer from "../CreateBeer";
 
 const VenueShow = () => {
     const {venueId} = useParams()
@@ -40,6 +41,9 @@ const VenueShow = () => {
                     </div>
                 ))}
             </ul>
+            {sessionUser.id === venue.user_id &&
+            <OpenModalButton buttonText={'Add a Beer'} modalComponent={<NewBeer type='Create a Beer' venue={venue}/>} />
+            }
             {sessionUser.id === venue.user_id &&
             <OpenModalButton buttonText={'Update Venue'} modalComponent={<NewVenue type='Update Venue' venue={venue}/>} />
             }

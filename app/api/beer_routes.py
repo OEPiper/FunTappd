@@ -20,7 +20,7 @@ def single_beer(id):
         return "Beer could not be found", 404
     return beer.to_dict()
 
-@beer_bp.route('/', methods=['POST'])
+@beer_bp.route('/new', methods=['POST'])
 def create_beer():
     form = BeerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
