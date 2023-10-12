@@ -56,7 +56,7 @@ def update_beer(id):
     db.session.commit()
     return beer_to_update.to_dict()
 
-@beer_bp.route('/<int:id>', methods=['DELETE'])
+@beer_bp.route('/<int:id>/delete', methods=['DELETE'])
 def remove_beer(id):
     beer_to_remove = Beer.query.get(id)
     if beer_to_remove is None:

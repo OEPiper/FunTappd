@@ -1,6 +1,7 @@
 export const LOAD_BEERS = 'beers/LOAD_BEERS'
 export const RECIEVE_BEER = 'beers/RECIEVE_BEER'
 export const UPDATE_BEER = 'beers/UPDATE_BEER'
+export const REMOVE_BEER = 'beers/REMOVE_BEER'
 
 export const actionLoadBeers = (beers) => {
     return {
@@ -20,6 +21,13 @@ export const actionUpdateBeer = (beer) => {
     return{
         type: UPDATE_BEER,
         beer
+    }
+}
+
+export const actionRemoveBeer = (beerId) => {
+    return{
+        type: REMOVE_BEER,
+        beerId
     }
 }
 
@@ -97,6 +105,13 @@ export const updateBeer = (data) => async(dispatch) => {
     }
 }
 
+export const deleteBeer = (data) => async(dispatch) => {
+    const res = await fetch(`/api/beers/${data}/delete`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json'}
+    })
+}
+
 const initialState = {}
 
 const beerReducer = (state = initialState, action) => {
@@ -110,6 +125,12 @@ const beerReducer = (state = initialState, action) => {
             return beersState
         case RECIEVE_BEER:
             return {...state, [action.beer.id]: action.beer}
+        case UPDATE_BEER:
+            return {...state, [action.beer.id]: action.beer};
+        case REMOVE_BEER:
+            const newState = {...state};
+            delete newState[action.beerId];
+            return newState
         default:
             return state
     }

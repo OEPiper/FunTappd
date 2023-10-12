@@ -5,6 +5,7 @@ import { beerDetails } from "../../store/beer";
 import { venueDetails } from "../../store/venue";
 import OpenModalButton from "../OpenModalButton";
 import NewBeer from "../CreateBeer";
+import DeleteBeerModal from "../DeleteBeer";
 
 const BeerShow = ({venue}) => {
     const {beerId} = useParams()
@@ -25,6 +26,9 @@ const BeerShow = ({venue}) => {
             {sessionUser.id === beer.user_id &&
             <OpenModalButton buttonText={'Update Beer'} modalComponent={<NewBeer type='Update Beer' venue={venue} beer={beer}/>} />
             }
+            {sessionUser.id === beer.user_id &&
+            <OpenModalButton buttonText={'Delete Beer'} modalComponent={<DeleteBeerModal beer={beer}/>} />
+            }  
         </div>
     )
 
