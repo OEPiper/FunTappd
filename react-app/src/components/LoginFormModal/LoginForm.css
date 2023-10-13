@@ -1,0 +1,26 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px black;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.login form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login form > button{
+    background-color: black;
+    color: white;
+    border: solid 2px white;
+    padding: 5px 0px;
+}
+
+.login p{
+    margin-bottom: 0;
+}

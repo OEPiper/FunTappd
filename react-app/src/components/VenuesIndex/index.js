@@ -34,7 +34,7 @@ function VenuesIndex(){
                 {venues.map((venue) => (
                     <div className="venue-card">
                         <Link exact to={`/venues/${venue.id}`}>
-                        <p>{venue.name}</p>
+                        <h3>{venue.name}</h3>
                         <p>{venue.location}</p>
                         </Link>
                     </div>
@@ -42,14 +42,19 @@ function VenuesIndex(){
             </ul>
             </div>
             <div className="profile-options">
+            {sessionUser &&
             <div className="profile-card">
                 <p>Hello, {sessionUser.username}</p>
                 <p>{sessionUser.email}</p>
                 <button onClick={handleLogout}>Log Out</button>
             </div>
+            }
+            <div className="create-btn">
+
             {sessionUser &&
             <OpenModalButton buttonText={'Create a Venue'} modalComponent={<NewVenue type='Create a Venue'/>} />
         }
+            </div>
             </div>
         </div>
     )

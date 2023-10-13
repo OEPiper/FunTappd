@@ -17,6 +17,8 @@
   padding-bottom: 10px;
   border-bottom: solid 5px #ffc000;
   margin-bottom: 0px;
+  position: sticky;
+  top: 0;
 }
 
 .home a{

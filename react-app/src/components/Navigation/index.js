@@ -15,11 +15,11 @@ function Navigation({ isLoaded }){
 				<NavLink exact to="/">FunTappd</NavLink>
 				}
 			</li>
-			{isLoaded && (
+			{/* {isLoaded && (
 				<li>
 					<ProfileButton user={sessionUser} />
 				</li>
-			)}
+			)} */}
 		</ul>
 	);
 }

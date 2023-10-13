@@ -19,3 +19,10 @@
     gap: 15px;
     justify-content: center;
 }
+
+.account-buttons button{
+    border: solid 2px white;
+    background-color: transparent;
+    color: white;
+    padding: 10px;
+}

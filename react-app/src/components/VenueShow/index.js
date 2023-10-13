@@ -52,6 +52,7 @@ const VenueShow = () => {
                 ))}
             </ul>
             </div>
+            {sessionUser &&
             <div className="profile-options">
             <div className="profile-card">
                 <p>Hello, {sessionUser.username}</p>
@@ -59,15 +60,16 @@ const VenueShow = () => {
                 <button onClick={handleLogout}>Log Out</button>
             </div>
             {sessionUser.id === venue.user_id &&
-            <OpenModalButton buttonText={'Add a Beer'} modalComponent={<NewBeer type='Create a Beer' venue={venue}/>} />
+                <OpenModalButton buttonText={'Add a Beer'} modalComponent={<NewBeer type='Create a Beer' venue={venue}/>} />
             }
             {sessionUser.id === venue.user_id &&
-            <OpenModalButton buttonText={'Update Venue'} modalComponent={<NewVenue type='Update Venue' venue={venue}/>} />
+                <OpenModalButton buttonText={'Update Venue'} modalComponent={<NewVenue type='Update Venue' venue={venue}/>} />
             }
             {sessionUser.id === venue.user_id &&
-            <OpenModalButton buttonText={'Delete Venue'} modalComponent={<DeleteVenueModal venue={venue}/>} />
+                <OpenModalButton buttonText={'Delete Venue'} modalComponent={<DeleteVenueModal venue={venue}/>} />
             }
             </div>
+        }
         </div>
     )
 }

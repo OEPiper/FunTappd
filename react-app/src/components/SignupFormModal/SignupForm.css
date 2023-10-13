@@ -1,0 +1,22 @@
+.signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px black;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.signup form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.signup form > button{
+    background-color: black;
+    color: white;
+    border: solid 2px white;
+    padding: 5px 0px;
+}

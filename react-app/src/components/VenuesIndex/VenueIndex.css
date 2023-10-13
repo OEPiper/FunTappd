@@ -16,8 +16,19 @@
 }
 
 .venue-card{
-    border: solid 1px black;
+    /* border: solid 1px black; */
     width: 350px;
+    display: flex;
+    justify-content: center;
+    box-shadow: black 2px 2px 5px;
+}
+
+.venue-card a{
+    text-decoration: none;
+    color: black;
+}
+
+.venue-card a>p{
     display: flex;
     justify-content: center;
 }
@@ -32,15 +43,29 @@
 }
 
 .profile-card{
-    border: solid 1px black;
+    /* border: solid 1px black; */
     width: 175px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 10px;
+    box-shadow: black 2px 2px 5px;
 }
 
 .profile-card p{
     margin: 5px auto;
+}
+
+.profile-card button{
+    color: white;
+    background-color: black;
+    margin-top: 5px;
+}
+
+.create-btn button{
+    background-color: #ffc000;
+    color: black;
+    border: solid 2px black;
+    padding: 10px 20px;
 }

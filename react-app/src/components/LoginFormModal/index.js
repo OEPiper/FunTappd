@@ -36,38 +36,39 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
+    <div className="login">
+      <h2>Welcome to FunTappd!</h2>
+      <p>Please log in to continue</p>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
-          Email
+        
           <input
             type="text"
             value={email}
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password
+        
+        
           <input
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
+        
         <button type="submit">Log In</button>
         <button onClick={demoUser}>
           Demo User
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

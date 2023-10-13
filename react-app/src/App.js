@@ -10,6 +10,7 @@ import VenuesIndex from "./components/VenuesIndex";
 import VenueShow from "./components/VenueShow";
 import NewVenue from "./components/CreateVenue";
 import BeerShow from "./components/BeerShow";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer/>
     </>
   );
 }

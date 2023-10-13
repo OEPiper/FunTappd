@@ -1,0 +1,19 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+}
+
+.footer p{
+    margin: 5px 0px;
+}
+
+.dev-links{
+    display: flex;
+    gap: 5px;
+}

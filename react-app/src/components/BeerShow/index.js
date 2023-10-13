@@ -34,6 +34,7 @@ const BeerShow = ({venue}) => {
             <p>ABV {parseFloat(beer.abv)}%</p>
             <p>IBU {beer.ibu}</p>
             </div>
+            {sessionUser &&
             <div className="profile-options">
             <div className="profile-card">
                 <p>Hello, {sessionUser.username}</p>
@@ -47,6 +48,7 @@ const BeerShow = ({venue}) => {
             <OpenModalButton buttonText={'Delete Beer'} modalComponent={<DeleteBeerModal beer={beer}/>} />
             }  
             </div>
+            }
         </div>
     )
 
