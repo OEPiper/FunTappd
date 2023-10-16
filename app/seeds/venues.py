@@ -11,9 +11,21 @@ def seed_venues():
     terrapin = Venue(
         name='Terrapin', location='Athens, GA', user_id=3
     )
+    red_hare = Venue(
+        name='Red Hare', location='Marietta, GA', user_id=1
+    )
+    dry_county = Venue(
+        name='Dry County', location='Kennesaw, GA', user_id=2
+    )
+    reformation = Venue(
+        name='Reformation', location='Woodstock, GA', user_id=3
+    )
     db.session.add(mnb)
     db.session.add(sweetwater)
     db.session.add(terrapin)
+    db.session.add(red_hare)
+    db.session.add(dry_county)
+    db.session.add(reformation)
     db.session.commit()
 
 def undo_venues():
