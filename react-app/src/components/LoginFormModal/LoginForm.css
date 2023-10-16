@@ -19,6 +19,7 @@
     color: white;
     border: solid 2px white;
     padding: 5px 0px;
+    border-radius: 5px;
 }
 
 .login p{

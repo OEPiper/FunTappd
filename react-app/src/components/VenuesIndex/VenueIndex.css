@@ -61,6 +61,7 @@
     color: white;
     background-color: black;
     margin-top: 5px;
+    border-radius: 5px;
 }
 
 .create-btn button{
@@ -68,4 +69,5 @@
     color: black;
     border: solid 2px black;
     padding: 10px 20px;
+    border-radius: 5px;
 }

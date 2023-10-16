@@ -1,11 +1,4 @@
-.submit-button:disabled{
-    background-color: white;
-    color: lightgray;
-    border: solid lightgray;
-    
-}
-
-.create-form{
+.delete-beer{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,9 +8,7 @@
     border: solid 2px black;
 }
 
-.submit-button{
-    background-color: #ffc000;
-    color: black;
+.delete-beer button{
     border: solid 2px black;
     padding: 10px 20px;
     border-radius: 5px;

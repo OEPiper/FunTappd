@@ -4,17 +4,19 @@ import { useDispatch, useSelector } from "react-redux"
 import { createBeer, beerDetails, loadBeers, updateBeer } from "../../store/beer"
 import { useModal } from "../../context/Modal"
 import { loadVenues } from "../../store/venue"
+import './CreateBeer.css'
 
 const NewBeer = ({venue, beer, type}) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const sessionUser = useSelector(state => state.session.user)
-    const [name, setName] = useState(beer?.name)
-    const [abv, setAbv] = useState(beer?.abv)
-    const [ibu, setIbu] = useState(beer?.ibu)
+    const [name, setName] = useState(beer? beer.name : "")
+    const [abv, setAbv] = useState(beer?beer.abv : 0)
+    const [ibu, setIbu] = useState(beer?beer.ibu : 0)
     const [venue_id, setVenue_id] = useState(beer?.venue_id)
     const [state, setState] = useState(false)
+    const [disable, setDisable] = useState(true)
     const handleSubmit = async(e) => {
         e.preventDefault()
         if(type === 'Create a Beer'){
@@ -51,6 +53,14 @@ const NewBeer = ({venue, beer, type}) => {
         }
     },[dispatch, state])
 
+    useEffect(() =>{
+        if(name.length < 1 || abv <= 0 || ibu < 1){
+            setDisable(true)
+        }else{
+            setDisable(false)
+        }
+    },[name, abv, ibu, disable])
+
     let submitText
     if(type === 'Create a Beer'){
       submitText = 'Create Beer'
@@ -58,7 +68,7 @@ const NewBeer = ({venue, beer, type}) => {
       submitText = 'Update Beer'
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="create-form">
             <h2>{type}</h2>
             <label>
                 Name
@@ -87,7 +97,7 @@ const NewBeer = ({venue, beer, type}) => {
                 onChange={(e) => setIbu(e.target.value)}
                 />
             </label>
-            <button type='submit' className='submit-button'>{submitText}</button>
+            <button type='submit' disabled={disable} className='submit-button'>{submitText}</button>
         </form>
     )
 }

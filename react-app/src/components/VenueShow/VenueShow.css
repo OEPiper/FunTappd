@@ -1,0 +1,42 @@
+.venue-beers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.venue-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: black 2px 2px 5px;
+    width: 450px;
+    margin-top: 15px;
+}
+
+#beer-count{
+    cursor: pointer;
+    border-top: solid 2px black;
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.beers a{
+    text-decoration: none;
+    color: black;
+}
+
+.beer-list{
+    display: flex;
+    flex-direction: column;
+    box-shadow: black 2px 2px 5px;
+    width: 350px;
+    align-items: center;
+}
+
+.beers{
+    border-top: solid 2px black;
+}
+

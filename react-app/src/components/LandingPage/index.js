@@ -25,7 +25,7 @@ function LandingPage() {
               />
               </div>
             </div>
-            <img src="https://assets.untappd.com/assets/custom/homepage/images/masthead-img-main.png" alt="Phone discover crop right" class="masthead-img"></img>
+            {/* <img src="https://assets.untappd.com/assets/custom/homepage/images/masthead-img-main.png" alt="Phone discover crop right" class="masthead-img"></img> */}
         </div>
     )
 }

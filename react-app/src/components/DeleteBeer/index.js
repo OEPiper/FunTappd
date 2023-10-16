@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteBeer } from "../../store/beer";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import './DeleteBeer.css'
 
 
 

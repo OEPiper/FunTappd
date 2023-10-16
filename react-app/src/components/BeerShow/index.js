@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import NewBeer from "../CreateBeer";
 import DeleteBeerModal from "../DeleteBeer";
 import { logout } from "../../store/session";
+import './BeerShow.css'
 
 const BeerShow = ({venue}) => {
     const {beerId} = useParams()
@@ -29,10 +30,12 @@ const BeerShow = ({venue}) => {
     }
     return(
         <div className="index">
-            <div>
+            <div className="beer-details">
+            <div className="beer-card">
             <h2>{beer.name}</h2>
             <p>ABV {parseFloat(beer.abv)}%</p>
             <p>IBU {beer.ibu}</p>
+            </div>
             </div>
             {sessionUser &&
             <div className="profile-options">
@@ -41,12 +44,16 @@ const BeerShow = ({venue}) => {
                 <p>{sessionUser.email}</p>
                 <button onClick={handleLogout}>Log Out</button>
             </div>
+            <div className="create-btn">
             {sessionUser.id === beer.user_id &&
             <OpenModalButton buttonText={'Update Beer'} modalComponent={<NewBeer type='Update Beer' venue={venue} beer={beer}/>} />
             }
+            </div>
+            <div className="create-btn">
             {sessionUser.id === beer.user_id &&
             <OpenModalButton buttonText={'Delete Beer'} modalComponent={<DeleteBeerModal beer={beer}/>} />
             }  
+            </div>
             </div>
             }
         </div>
