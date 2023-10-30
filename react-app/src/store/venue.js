@@ -58,12 +58,8 @@ export const createVenue = (data) => async(dispatch, getState) => {
     const {name, location, user_id} = data
     const res = await fetch('/api/venues/new', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            name: name,
-            location: location,
-            user_id: user_id
-        })
+        body: data
+        
     });
     if(res.ok){
         const newVenue = await res.json();
