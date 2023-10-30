@@ -19,6 +19,7 @@ const VenueShow = () => {
     const sessionUser = useSelector((state) => state.session.user)
     const dispatch = useDispatch();
     const [showBeers, setShowBeers] = useState(false)
+    console.log(venue)
     useEffect(() => {
         dispatch(venueDetails(venueId))
         dispatch(loadBeers(venueId))

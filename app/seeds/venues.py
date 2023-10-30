@@ -3,13 +3,22 @@ from sqlalchemy.sql import text
 
 def seed_venues():
     mnb = Venue(
-       name='Monday Night Brewing', location='Atlanta, GA', user_id=1 
+       name='Monday Night Brewing', 
+       location='Atlanta, GA',
+       logo= 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/Monday_Night_Brewing_Company_Logo.jpg/250px-Monday_Night_Brewing_Company_Logo.jpg', 
+       user_id=1 
     )
     sweetwater = Venue(
-        name='SweetWater', location='Smyrna, GA', user_id=2
+        name='SweetWater', 
+        location='Smyrna, GA',
+        logo='https://pbs.twimg.com/profile_images/638735826390638593/mZLzhEnU_400x400.jpg', 
+        user_id=2
     )
     terrapin = Venue(
-        name='Terrapin', location='Athens, GA', user_id=3
+        name='Terrapin', 
+        location='Athens, GA',
+        logo='https://pbs.twimg.com/profile_images/1410624218220404743/O1gStziA_400x400.jpg', 
+        user_id=3
     )
     db.session.add(mnb)
     db.session.add(sweetwater)

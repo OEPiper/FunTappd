@@ -1,6 +1,7 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, redirect, request, jsonify
 from app.models import Venue, User, db, Beer
 from ..forms import VenueForm
+from .aws_helpers import get_unique_filename,upload_file_to_s3,remove_file_from_s3
 
 venue_bp = Blueprint('venue', __name__)
 
@@ -25,14 +26,20 @@ def create_venue():
     form = VenueForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        image = form.data["logo"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return jsonify({"error": "Failed to upload image to S3"}), 400
         new_venue = Venue(
             name = form.data["name"],
             location = form.data["location"],
+            logo = upload["url"],
             user_id = form.data["user_id"]
         )
         db.session.add(new_venue)
         db.session.commit()
-        return new_venue.to_dict()
+        return jsonify(new_venue.to_dict())
     return {'error'}
 
 @venue_bp.route('/<int:id>/update', methods=['PUT'])

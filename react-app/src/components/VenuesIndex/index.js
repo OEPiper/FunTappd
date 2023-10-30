@@ -13,7 +13,7 @@ function VenuesIndex(){
     const venues = Object.values(allVenues)
     const dispatch = useDispatch()
     const history = useHistory()
-
+    console.log(venues[3])
     useEffect(() => {
         dispatch(loadVenues());
     }, [dispatch, venues.length])
@@ -33,6 +33,7 @@ function VenuesIndex(){
             <ul>
                 {venues.map((venue) => (
                     <div className="venue-card">
+                        <img src={venue.logo} alt="Logo" className="logo"/>
                         <Link exact to={`/venues/${venue.id}`}>
                         <h3>{venue.name}</h3>
                         <p>{venue.location}</p>

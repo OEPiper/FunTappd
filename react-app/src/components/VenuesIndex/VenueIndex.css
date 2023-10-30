@@ -19,8 +19,9 @@
     /* border: solid 1px black; */
     width: 350px;
     display: flex;
-    justify-content: center;
+    align-items: center;
     box-shadow: black 2px 2px 5px;
+    gap: 15px;
 }
 
 .venue-card a{
@@ -70,4 +71,9 @@
     border: solid 2px black;
     padding: 10px 20px;
     border-radius: 5px;
+}
+
+.logo {
+    height: 150px;
+    width: 150px;
 }

@@ -15,16 +15,26 @@ const NewVenue = ({venue, type}) =>{
     const [location, setLocation] = useState(venue? venue.location : "")
     const [state, setState] = useState(false)
     const [disable, setDisable] = useState(true)
+    const [image, setImage] = useState(null);
+    const [imageLoading, setImageLoading] = useState(false);
+
     venue = {
         ...venue,
         name,
         location,
+        logo: image,
         user_id: sessionUser.id
     }
     const handleSubmit = async(e) => {
         e.preventDefault()
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('location', location);
+        formData.append('logo', image);
+        formData.append('user_id', sessionUser.id);
         if(type === 'Create a Venue'){
-        const newVenue = await dispatch(createVenue(venue))
+        setImageLoading(true);
+        const newVenue = await dispatch(createVenue(formData))
         venue = newVenue
         }else if(type === 'Update Venue'){
             const updatedVenue = await dispatch(updateVenue(venue))
@@ -52,7 +62,7 @@ const NewVenue = ({venue, type}) =>{
     }
     
     return (
-        <form onSubmit={handleSubmit} className="create-form">
+        <form onSubmit={handleSubmit} className="create-form" method="POST" encType="multipart/form-data">
             <h2>{type}</h2>
             <label>
                 Name:
@@ -72,6 +82,17 @@ const NewVenue = ({venue, type}) =>{
                 onChange={(e) => setLocation(e.target.value)}
                 />
             </label>
+            {type === 'Create a Venue' &&
+            <label>
+                Logo:
+                <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+                />
+            </label>
+            }
+            {(imageLoading)&& <p>Loading...</p>}
             <button type='submit' disabled={disable} className='submit-button'>{submitText}</button>
         </form>
     )
