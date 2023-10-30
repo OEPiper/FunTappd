@@ -21,13 +21,22 @@ def seed_venues():
         user_id=3
     )
     red_hare = Venue(
-        name='Red Hare', location='Marietta, GA', user_id=1
+        name='Red Hare',
+        location='Marietta, GA',
+        logo='https://assets.untappd.com/site/brewery_logos/brewery-15126_97267.jpeg', 
+        user_id=1
     )
     dry_county = Venue(
-        name='Dry County', location='Kennesaw, GA', user_id=2
+        name='Dry County', 
+        location='Kennesaw, GA', 
+        logo='https://assets.untappd.com/site/brewery_logos/brewery-234004_0b09a.jpeg',
+        user_id=2
     )
     reformation = Venue(
-        name='Reformation', location='Woodstock, GA', user_id=3
+        name='Reformation', 
+        location='Woodstock, GA', 
+        logo='https://assets.untappd.com/site/brewery_logos/brewery-10516_de640.jpeg',
+        user_id=3
     )
     db.session.add(mnb)
     db.session.add(sweetwater)
