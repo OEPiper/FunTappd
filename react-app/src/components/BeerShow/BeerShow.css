@@ -14,3 +14,15 @@
     justify-content: center;
     align-items: center;
 }
+
+.filled {
+    color: gold;
+  }
+  
+ .empty {
+    color: grey;
+  }
+
+.rating-show {
+    display: flex;
+}

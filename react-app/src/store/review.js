@@ -32,7 +32,7 @@ export const actionRemoveReview = (reviewId) =>{
 }
 
 export const loadReviews = (beerId) => async(dispatch) => {
-    const res = await fetch(`/api/${beerId}/reviews`)
+    const res = await fetch(`/api/beers/${beerId}/reviews`)
     if(res.ok){
         const reviews = await res.json()
         dispatch(actionLoadReviews(reviews))

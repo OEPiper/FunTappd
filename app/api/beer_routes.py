@@ -67,7 +67,7 @@ def remove_beer(id):
 
 @beer_bp.route('/<int:id>/reviews')
 def beer_reviews(id):
-    reviews = Review.query.filter_by(beer_id = id).all()
+    reviews = Review.query.filter_by(beer_id = id).join(User).filter(User.id == Review.user_id).all()
     if reviews is None:
         return "No reviews found", 404
     review_list = []

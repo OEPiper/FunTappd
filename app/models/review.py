@@ -35,4 +35,9 @@ class Review(db.Model):
             'beer_id': self.beer_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'user': {
+                "id": self.user.id,
+                "username": self.user.username,
+                "email": self.user.email
+            }
         } 

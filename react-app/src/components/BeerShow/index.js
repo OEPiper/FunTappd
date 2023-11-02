@@ -6,25 +6,34 @@ import { venueDetails } from "../../store/venue";
 import OpenModalButton from "../OpenModalButton";
 import NewBeer from "../CreateBeer";
 import DeleteBeerModal from "../DeleteBeer";
+import NewReview from "../CreateReview";
 import { logout } from "../../store/session";
+import { loadReviews } from "../../store/review";
 import './BeerShow.css'
 
 const BeerShow = ({venue}) => {
     const {beerId} = useParams()
     const history = useHistory()
     const beer = useSelector((state) => state.beer ? state.beer[beerId] : null)
+    const allReviews = useSelector((state) => state.review ? state.review : [])
+    const reviews = Object.values(allReviews)
     const sessionUser = useSelector((state) => state.session.user)
     const dispatch = useDispatch()
     console.log(venue)
     
     useEffect(() => {
         dispatch(beerDetails(beerId))
-    }, [dispatch, beerId])
+        dispatch(loadReviews(beerId))
+    }, [dispatch, beerId, reviews.length])
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
         history.push('/')
       };
+    let reviewText = "Reviews"
+    if(reviews.length === 1){
+        reviewText = "Review"
+    }
     if(!beer){
         return null
     }
@@ -35,7 +44,34 @@ const BeerShow = ({venue}) => {
             <h2>{beer.name}</h2>
             <p>ABV {parseFloat(beer.abv)}%</p>
             <p>IBU {beer.ibu}</p>
+            <p>{reviews.length} {reviewText}</p>
             </div>
+            <ul className="review-list">
+                {reviews.map((review) => (
+                    <div className="reviews">
+                        <p>{review.user.username}</p>
+                        <p>{review.text}</p>
+                        <div className="rating-show">
+                        <div className={review.rating >= 1 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={review.rating >= 2 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={review.rating >= 3 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={review.rating >= 4 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={review.rating >= 5 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        </div>
+                        <img src={review.photo}/>
+                    </div>
+                ))}
+            </ul>
             </div>
             {sessionUser &&
             <div className="profile-options">
@@ -52,6 +88,11 @@ const BeerShow = ({venue}) => {
             <div className="create-btn">
             {sessionUser.id === beer.user_id &&
             <OpenModalButton buttonText={'Delete Beer'} modalComponent={<DeleteBeerModal beer={beer}/>} />
+            }  
+            </div>
+            <div className="create-btn">
+            {sessionUser.id !== beer.user_id &&
+            <OpenModalButton buttonText={'Add a Review'} modalComponent={<NewReview type='Create Review' beer={beer}/>} />
             }  
             </div>
             </div>
