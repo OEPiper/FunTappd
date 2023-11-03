@@ -13,7 +13,6 @@ function VenuesIndex(){
     const venues = Object.values(allVenues)
     const dispatch = useDispatch()
     const history = useHistory()
-    console.log(venues[3])
     useEffect(() => {
         dispatch(loadVenues());
     }, [dispatch, venues.length])

@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import NewBeer from "../CreateBeer";
 import DeleteBeerModal from "../DeleteBeer";
 import NewReview from "../CreateReview";
+import DeleteReviewModal from "../DeleteReview";
 import { logout } from "../../store/session";
 import { loadReviews } from "../../store/review";
 import './BeerShow.css'
@@ -69,6 +70,13 @@ const BeerShow = ({venue}) => {
                         </div>
                         </div>
                         <img src={review.photo}/>
+                        {sessionUser.id === review.user_id &&
+                        <div className="create-btn">
+                        <OpenModalButton buttonText={'Edit Review'} modalComponent={<NewReview type='Update Review' beer={beer} review={review}/>} />
+                        <OpenModalButton buttonText={'Delete Review'} modalComponent={<DeleteReviewModal review={review}/>} />
+                        </div>
+                        }  
+                       
                     </div>
                 ))}
             </ul>

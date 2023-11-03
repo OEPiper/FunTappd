@@ -27,17 +27,26 @@ def create_review():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         image = form.data["photo"]
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        if "url" not in upload:
-            return jsonify({"error": "Failed to upload image to S3"}), 400
-        new_review = Review(
-            rating = form.data["rating"],
-            text = form.data["text"],
-            photo = upload["url"],
-            user_id = form.data["user_id"],
-            beer_id = form.data["beer_id"]
-        )
+        print(image)
+        if(image is not None):
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            if "url" not in upload:
+                return jsonify({"error": "Failed to upload image to S3"}), 400
+            new_review = Review(
+                rating = form.data["rating"],
+                text = form.data["text"],
+                photo = upload["url"],
+                user_id = form.data["user_id"],
+                beer_id = form.data["beer_id"]
+            )
+        if(image is None):
+            new_review = Review(
+                rating = form.data["rating"],
+                text = form.data["text"],
+                user_id = form.data["user_id"],
+                beer_id = form.data["beer_id"]
+            )
         db.session.add(new_review)
         db.session.commit()
         return jsonify(new_review.to_dict())

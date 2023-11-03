@@ -1,7 +1,7 @@
 export const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
-export const RECIEVE_REVIEW = 'reviews/RECIEVE_REVIEWS'
-export const UPDATE_REVIEW = 'reviews/UPDATE_REVIEWS'
-export const REMOVE_REVIEW = 'reviews/REMOVE_REVIEWS'
+export const RECIEVE_REVIEW = 'reviews/RECIEVE_REVIEW'
+export const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
+export const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW'
 
 export const actionLoadReviews = (reviews) => {
     return {
@@ -57,7 +57,7 @@ export const reviewDetails = (reviewId) => async(dispatch) => {
 export const createReview = (data) => async(dispatch) => {
     const res = await fetch('/api/reviews/new', {
         method: 'POST',
-        body: data 
+        body: data
     });
     if(res.ok){
         const newReview = await res.json();

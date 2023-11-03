@@ -24,17 +24,18 @@ const NewReview = ({beer, review, type}) =>{
         beer_id: beer.id
     }
     const handleSubmit = async(e) => {
-        e.prreventDefault()
+        e.preventDefault()
         const formData = new FormData();
         formData.append('text', text)
-        formData.append('rating', setRating)
+        formData.append('rating', rating)
         formData.append('photo', image)
         formData.append('user_id', sessionUser.id)
         formData.append('beer_id', beer.id)
         if(type === 'Create Review'){
             setImageLoading(true);
-            const newReview = await dispatch(createReview(review))
+            const newReview = await dispatch(createReview(formData))
             review = newReview
+            console.log(review)
         }else if(type === 'Update Review'){
             const updatedReview = await dispatch(updateReview(review))
         }
@@ -42,7 +43,6 @@ const NewReview = ({beer, review, type}) =>{
         return(closeModal())
     }
     useEffect(() =>{
-        console.log(type)
         if(text.length < 3 || rating <= 0){
             setDisable(true)
         }else{
