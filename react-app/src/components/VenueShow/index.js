@@ -39,6 +39,7 @@ const VenueShow = () => {
         <div className="index">
             <div className="venue-beers">
             <div className="venue-details">
+            <img src={venue.logo} alt="Logo" className="logo"/>
             <h2>{venue.name}</h2>
             <p>{venue.location}</p>
             <p onClick={(e) => setShowBeers(!showBeers)} id="beer-count">{beers.length} {beerText}</p>

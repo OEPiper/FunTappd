@@ -38,6 +38,12 @@ const BeerShow = ({venue}) => {
     if(!beer){
         return null
     }
+    let ratingTotal = 0
+    for(let i = 0; i < reviews.length; i++){
+        let review = reviews[i];
+        ratingTotal += review.rating
+    }
+    let ratingAvg = ratingTotal/reviews.length
     return(
         <div className="index">
             <div className="beer-details">
@@ -45,12 +51,29 @@ const BeerShow = ({venue}) => {
             <h2>{beer.name}</h2>
             <p>ABV {parseFloat(beer.abv)}%</p>
             <p>IBU {beer.ibu}</p>
+            <div className="rating-show">
+                        <div className={ratingAvg >= 1 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={ratingAvg >= 2 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={ratingAvg >= 3 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={ratingAvg >= 4 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <div className={ratingAvg >= 5 ? "filled" : "empty"}>
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        </div>
             <p>{reviews.length} {reviewText}</p>
             </div>
             <ul className="review-list">
                 {reviews.map((review) => (
                     <div className="reviews">
-                        <p>{review.user.username}</p>
+                        <h2 className="user">{review.user.username}</h2>
                         <p>{review.text}</p>
                         <div className="rating-show">
                         <div className={review.rating >= 1 ? "filled" : "empty"}>
