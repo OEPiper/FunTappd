@@ -14,3 +14,39 @@
     justify-content: center;
     align-items: center;
 }
+
+.filled {
+    color: gold;
+  }
+  
+ .empty {
+    color: grey;
+  }
+
+.rating-show {
+    display: flex;
+}
+
+.reviews{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    box-shadow: black 2px 2px 5px;
+    padding: 15px;
+}
+
+.reviews img{
+    height: fit-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+
+.user{
+    border-bottom: 2px solid black;
+}

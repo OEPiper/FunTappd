@@ -62,7 +62,7 @@ const NewVenue = ({venue, type}) =>{
     }
     
     return (
-        <form onSubmit={handleSubmit} className="create-form" method="POST" encType="multipart/form-data">
+        <form onSubmit={handleSubmit} className="create-form" encType="multipart/form-data">
             <h2>{type}</h2>
             <label>
                 Name:

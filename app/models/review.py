@@ -1,24 +1,23 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
-class Beer(db.Model):
-    __tablename__ = "beers"
+class Review(db.Model):
+    __tablename__ = "reviews"
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    abv = db.Column(db.Float(4,2), nullable=False)
-    ibu = db.Column(db.Integer, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    text = db.Column(db.String(2000), nullable=False)
+    photo = db.Column(db.String(2000), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    venue_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("venues.id")), nullable=False)
+    beer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("beers.id")), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    user = db.relationship("User", back_populates="beers")
-    venue = db.relationship("Venue", back_populates="beers")
-    reviews = db.relationship("Review", back_populates="beer", cascade="all, delete-orphan")
+    user = db.relationship("User", back_populates="reviews")
+    beer = db.relationship("Beer", back_populates="reviews")
 
     def add_prefix_for_prod(attr):
         if environment == "production":
@@ -29,11 +28,16 @@ class Beer(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            "name": self.name,
-            "abv": self.abv,
-            "ibu": self.ibu,
+            "rating": self.rating,
+            "text": self.text,
+            "photo": self.photo,
             'user_id': self.user_id,
-            'venue_id': self.venue_id,
+            'beer_id': self.beer_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'user': {
+                "id": self.user.id,
+                "username": self.user.username,
+                "email": self.user.email
+            }
         } 
