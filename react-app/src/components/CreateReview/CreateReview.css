@@ -1,0 +1,9 @@
+.rating-input{
+    display: flex;
+    flex-direction: row;
+}
+
+.review-text{
+    display: flex;
+    flex-direction: row;
+}

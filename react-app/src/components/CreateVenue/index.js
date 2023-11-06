@@ -17,7 +17,7 @@ const NewVenue = ({venue, type}) =>{
     const [disable, setDisable] = useState(true)
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
-
+    const [error, setError] = setState("")
     venue = {
         ...venue,
         name,
@@ -60,6 +60,9 @@ const NewVenue = ({venue, type}) =>{
     }else{
       submitText = 'Update Venue'
     }
+    if(name.length > 255){
+        setError("Name is too long")
+    }
     
     return (
         <form onSubmit={handleSubmit} className="create-form" encType="multipart/form-data">
@@ -73,6 +76,8 @@ const NewVenue = ({venue, type}) =>{
                 onChange={(e) => setName(e.target.value)}
                 />
             </label>
+            {error && 
+            <p>{error}</p>}
             <label>
                 Location:
                 <input 

@@ -22,6 +22,7 @@ function SignupFormModal() {
 			if (data) {
 				setErrors(data);
 			} else {
+				history.push('/home')
 				closeModal();
 			}
 		} else {
@@ -29,7 +30,6 @@ function SignupFormModal() {
 				"Confirm Password field must be the same as the Password field",
 			]);
 		}
-		history.push('/home')
 	};
 
 	return (

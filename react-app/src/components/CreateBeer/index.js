@@ -17,6 +17,7 @@ const NewBeer = ({venue, beer, type}) => {
     const [venue_id, setVenue_id] = useState(beer?.venue_id)
     const [state, setState] = useState(false)
     const [disable, setDisable] = useState(true)
+    const [error, setError] = useState("")
     const handleSubmit = async(e) => {
         e.preventDefault()
         if(type === 'Create a Beer'){
@@ -67,6 +68,9 @@ const NewBeer = ({venue, beer, type}) => {
     }else{
       submitText = 'Update Beer'
     }
+    if(name.length > 255){
+        setError("Name is too long")
+    }
     return (
         <form onSubmit={handleSubmit} className="create-form">
             <h2>{type}</h2>
@@ -79,6 +83,8 @@ const NewBeer = ({venue, beer, type}) => {
                 onChange={(e) => setName(e.target.value)}
                 />
             </label>
+            {error && 
+            <p>{error}</p>}
             <label>
                 ABV
                 <input 

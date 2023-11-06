@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { createReview, updateReview } from "../../store/review"
 import { useModal } from "../../context/Modal"
+import "./CreateReview.css"
 
 const NewReview = ({beer, review, type}) =>{
     const history = useHistory()
@@ -14,6 +15,7 @@ const NewReview = ({beer, review, type}) =>{
     const [disable, setDisable] = useState(false)
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
+    const [error, setError] = useState("")
 
     review = {
         ...review,
@@ -49,6 +51,9 @@ const NewReview = ({beer, review, type}) =>{
             setDisable(false)
         }
     }, [text, rating, disable])
+    if(text.length > 2000){
+        setError("Review is too long")
+    }
 
     return (
         <form onSubmit={handleSubmit} className="create-form" encType="multipart/form-data" >
@@ -95,14 +100,16 @@ const NewReview = ({beer, review, type}) =>{
                     <i class="fa-solid fa-beer-mug-empty"></i>
                 </div>
                 </div>
-                <label>
+                <label className="review-text">
                 Review:
                 <textarea 
-                placeholder="Leave a review here"
+                placeholder="Leave a review here(2000 character limit)"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 />
                  </label>
+                 {error && 
+                <p>{error}</p>}
                  {type === 'Create Review' &&
                  <label>
                 Photo:
