@@ -9,7 +9,8 @@ class Venue(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    location = db.Column(db.String(255))
+    location = db.Column(db.String(255), nullable=False)
+    story = db.Column(db.String(2000), nullable=True)
     logo = db.Column(db.String(2000), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -28,6 +29,7 @@ class Venue(db.Model):
             'id': self.id,
             "name": self.name,
             "logo": self.logo,
+            "story": self.story,
             "location": self.location,
             'user_id': self.user_id,
             'created_at': self.created_at,

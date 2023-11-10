@@ -9,8 +9,11 @@ class Beer(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
+    type = db.Column(db.String(255), nullable=True)
     abv = db.Column(db.Float(4,2), nullable=False)
     ibu = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.String(2000), nullable=True)
+    photo = db.Column(db.String(2000), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     venue_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("venues.id")), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -30,8 +33,11 @@ class Beer(db.Model):
         return {
             'id': self.id,
             "name": self.name,
+            "type": self.type,
             "abv": self.abv,
             "ibu": self.ibu,
+            "description": self.description,
+            "photo": self.photo,
             'user_id': self.user_id,
             'venue_id': self.venue_id,
             'created_at': self.created_at,

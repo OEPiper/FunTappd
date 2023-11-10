@@ -29,6 +29,7 @@ function VenuesIndex(){
     return (
         <div className="index">
             <div className="venue-list">
+            <h2>Breweries</h2>
             <ul>
                 {venues.map((venue) => (
                     <div className="venue-card">
