@@ -1,6 +1,7 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, redirect, request, jsonify
 from app.models import Venue, User, db, Beer, Review
 from ..forms import BeerForm
+from .aws_helpers import get_unique_filename,upload_file_to_s3,remove_file_from_s3
 
 beer_bp = Blueprint('beer', __name__)
 
@@ -25,10 +26,18 @@ def create_beer():
     form = BeerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        image = form.data["photo"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return jsonify({"error": "Failed to upload image to S3"}), 400
         new_beer = Beer(
             name = form.data["name"],
+            type = form.data["type"],
             abv = form.data["abv"],
             ibu = form.data["ibu"],
+            description = form.data["description"],
+            photo = upload["url"],
             user_id = form.data["user_id"],
             venue_id = form.data["venue_id"]
         )
@@ -45,10 +54,14 @@ def update_beer(id):
     update_data = request.get_json()
     if "name" in update_data:
         beer_to_update.name = update_data["name"]
+    if "type" in update_data:
+        beer_to_update.type = update_data["type"]
     if "abv" in update_data:
         beer_to_update.abv = update_data["abv"]
     if "ibu" in update_data:
         beer_to_update.ibu = update_data["ibu"]
+    if "description" in update_data:
+        beer_to_update.description = update_data["description"]
     if "user_id" in update_data:
         beer_to_update.user_id = update_data["user_id"]
     if "venue_id" in update_data:

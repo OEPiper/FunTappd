@@ -34,6 +34,7 @@ def create_venue():
         new_venue = Venue(
             name = form.data["name"],
             location = form.data["location"],
+            story = form.data["story"],
             logo = upload["url"],
             user_id = form.data["user_id"]
         )
@@ -52,6 +53,8 @@ def update_venue(id):
         venue_to_update.name = update_data["name"]
     if "location" in update_data:
         venue_to_update.location = update_data["location"]
+    if "story" in update_data:
+        venue_to_update.story = update_data["story"]
     if "user_id" in update_data:
         venue_to_update.user_id = update_data["user_id"]
     db.session.commit()

@@ -18,6 +18,7 @@ class Review(db.Model):
 
     user = db.relationship("User", back_populates="reviews")
     beer = db.relationship("Beer", back_populates="reviews")
+    toasts = db.relationship("Toast", back_populates="reviews", cascade="all, delete-orphan")
 
     def add_prefix_for_prod(attr):
         if environment == "production":

@@ -9,7 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .config import Config
-from .api import venue_bp, beer_bp, review_bp
+from .api import venue_bp, beer_bp, review_bp, toast_bp
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -32,6 +32,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(venue_bp, url_prefix='/api/venues')
 app.register_blueprint(beer_bp, url_prefix='/api/beers')
 app.register_blueprint(review_bp, url_prefix='/api/reviews')
+app.register_blueprint(toast_bp, url_prefix='api/toasts')
 db.init_app(app)
 Migrate(app, db)
 
