@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .venues import seed_venues, undo_venues
 from .beers import seed_beers, undo_beers
 from .reviews import seed_reviews, undo_reviews
+from .toasts import seed_toasts, undo_toasts
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,10 +24,12 @@ def seed():
         undo_venues()
         undo_beers()
         undo_reviews()
+        undo_toasts()
     seed_users()
     seed_venues()
     seed_beers()
     seed_reviews()
+    seed_toasts()
     # Add other seed functions here
 
 
@@ -37,4 +40,5 @@ def undo():
     undo_venues()
     undo_beers()
     undo_reviews()
+    undo_toasts()
     # Add other undo functions here
