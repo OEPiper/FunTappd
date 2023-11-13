@@ -32,7 +32,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(venue_bp, url_prefix='/api/venues')
 app.register_blueprint(beer_bp, url_prefix='/api/beers')
 app.register_blueprint(review_bp, url_prefix='/api/reviews')
-app.register_blueprint(toast_bp, url_prefix='api/toasts')
+app.register_blueprint(toast_bp, url_prefix='/api/toasts')
 db.init_app(app)
 Migrate(app, db)
 

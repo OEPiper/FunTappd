@@ -11,7 +11,7 @@ class Toast(db.Model):
     review_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("reviews.id")), nullable=False)
     
     user = db.relationship("User", back_populates="toasts")
-    reviews = db.relationship("TextPost", back_populates="toasts")
+    reviews = db.relationship("Review", back_populates="toasts")
     
     def add_prefix_for_prod(attr):
         if environment == "production":
