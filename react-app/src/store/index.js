@@ -4,12 +4,14 @@ import session from './session'
 import venueReducer from './venue';
 import beerReducer from './beer';
 import reviewReducer from './review';
+import toastReducer from './toast';
 
 const rootReducer = combineReducers({
   session,
   venue : venueReducer,
   beer : beerReducer,
-  review: reviewReducer
+  review: reviewReducer,
+  toast: toastReducer
 });
 
 

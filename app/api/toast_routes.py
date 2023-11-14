@@ -16,7 +16,7 @@ def get_review_toasts(id):
         toast_list.append(toast_dict)
     return {"Toasts": toast_list}
 
-@toast_bp.route('review/<int:id>', methods=['POST'])
+@toast_bp.route('/review/<int:id>', methods=['POST'])
 def toast_review(id):
     review = Review.query.get_or_404(id)
     user_id = request.get_json().get('user_id')
@@ -30,7 +30,7 @@ def toast_review(id):
         return "Post already liked"
     return "User must be logged in", 400
 
-@toast_bp.route('review/<int:id>', methods=['DELETE'])
+@toast_bp.route('/review/<int:id>', methods=['DELETE'])
 def untoast_review(id):
     review = Review.query.get_or_404(id)
     user_id = request.get_json().get('user_id')
