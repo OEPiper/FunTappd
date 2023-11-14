@@ -50,3 +50,23 @@
 .user{
     border-bottom: 2px solid black;
 }
+
+.beer-card p{
+    margin: 8px;
+}
+
+.description{
+    padding: 10px;
+}
+
+.upper-card{
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+    align-items: center;
+}
+
+.beer-photo{
+    height: 100px;
+    border-radius: 5px;
+}

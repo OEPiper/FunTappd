@@ -42,6 +42,7 @@ const VenueShow = () => {
             <img src={venue.logo} alt="Logo" className="logo"/>
             <h2>{venue.name}</h2>
             <p>{venue.location}</p>
+            <p className="story">{venue.story}</p>
             <p onClick={(e) => setShowBeers(!showBeers)} id="beer-count">{beers.length} {beerText}</p>
             </div>
             {showBeers &&
@@ -67,7 +68,7 @@ const VenueShow = () => {
             </div>
             <div className="create-btn">
             {sessionUser.id === venue.user_id &&
-                <OpenModalButton id='create-beer' buttonText={'Add a Beer'} modalComponent={<NewBeer type='Create a Beer' venue={venue}/>} />
+                <OpenModalButton id='create-beer' buttonText={'Add a Beer'} modalComponent={<NewBeer formType='Create a Beer' venue={venue}/>} />
             }
             </div>
             <div className="create-btn">

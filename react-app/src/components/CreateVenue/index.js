@@ -12,15 +12,17 @@ const NewVenue = ({venue, type}) =>{
     const {closeModal} = useModal()
     const sessionUser = useSelector(state => state.session.user)
     const [name, setName] = useState(venue? venue.name : "")
+    const [story, setStory] = useState(venue? venue.story : "")
     const [location, setLocation] = useState(venue? venue.location : "")
     const [state, setState] = useState(false)
     const [disable, setDisable] = useState(true)
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
-    const [error, setError] = setState("")
+    const [error, setError] = useState("")
     venue = {
         ...venue,
         name,
+        story,
         location,
         logo: image,
         user_id: sessionUser.id
@@ -29,6 +31,7 @@ const NewVenue = ({venue, type}) =>{
         e.preventDefault()
         const formData = new FormData();
         formData.append('name', name);
+        formData.append('story', story);
         formData.append('location', location);
         formData.append('logo', image);
         formData.append('user_id', sessionUser.id);
@@ -78,6 +81,14 @@ const NewVenue = ({venue, type}) =>{
             </label>
             {error && 
             <p>{error}</p>}
+            <label className="review-text">
+                Your Story:
+                <textarea 
+                placeholder="Tell us about your brewery(2000 character limit)"
+                value={story}
+                onChange={(e) => setStory(e.target.value)}
+                />
+                 </label>
             <label>
                 Location:
                 <input 

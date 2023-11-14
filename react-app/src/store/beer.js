@@ -70,14 +70,7 @@ export const createBeer = (data) => async(dispatch) =>{
     const {name, abv, ibu, user_id, venue_id} = data
     const res = await fetch('/api/beers/new', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            name: name,
-            abv: abv,
-            ibu: ibu,
-            user_id: user_id,
-            venue_id: venue_id
-        })
+        body: data
     });
     if(res.ok){
         const newBeer = await res.json();

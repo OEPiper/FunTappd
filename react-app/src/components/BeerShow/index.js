@@ -48,9 +48,16 @@ const BeerShow = ({venue}) => {
         <div className="index">
             <div className="beer-details">
             <div className="beer-card">
+            <div className="upper-card">
+            <img src={beer.photo} alt="photo" className="beer-photo"/>
+            <div>
             <h2>{beer.name}</h2>
+            <p>{beer.type}</p>
             <p>ABV {parseFloat(beer.abv)}%</p>
             <p>IBU {beer.ibu}</p>
+            </div>
+            </div>
+            <p className="description">{beer.description}</p>
             <div className="rating-show">
                         <div className={ratingAvg >= 1 ? "filled" : "empty"}>
                         <i class="fa-solid fa-beer-mug-empty"></i>
@@ -113,7 +120,7 @@ const BeerShow = ({venue}) => {
             </div>
             <div className="create-btn">
             {sessionUser.id === beer.user_id &&
-            <OpenModalButton buttonText={'Update Beer'} modalComponent={<NewBeer type='Update Beer' venue={venue} beer={beer}/>} />
+            <OpenModalButton buttonText={'Update Beer'} modalComponent={<NewBeer formType='Update Beer' venue={venue} beer={beer}/>} />
             }
             </div>
             <div className="create-btn">
