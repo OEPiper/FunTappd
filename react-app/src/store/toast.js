@@ -70,7 +70,7 @@ const initialState = {}
 const toastReducer = (state = initialState, action) => {
     switch(action.type){
         case LOAD_TOASTS:
-            const toastsState = {};
+            const toastsState = {...state};
             const toastsAction = action.toasts;
             toastsAction.Toasts.forEach((toast) => {
                 toastsState[toast.id] = toast

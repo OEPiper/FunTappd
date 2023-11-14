@@ -1,0 +1,21 @@
+.isToasted{
+    background-color: #ffc000;
+    color: black;
+    border: solid 2px black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px 5px 5px 0px;
+}
+
+.notToasted{
+    background-color: gray;
+    color: black;
+    border: solid 2px black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px 5px 5px 0px;
+}
+
+.total-toasts i{
+    color: #ffc000;
+}

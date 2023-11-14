@@ -40,5 +40,6 @@ class Review(db.Model):
                 "id": self.user.id,
                 "username": self.user.username,
                 "email": self.user.email
-            }
+            },
+            'toasts': [toast.to_dict() for toast in self.toasts]
         } 

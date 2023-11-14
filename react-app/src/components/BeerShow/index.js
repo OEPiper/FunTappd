@@ -8,6 +8,8 @@ import NewBeer from "../CreateBeer";
 import DeleteBeerModal from "../DeleteBeer";
 import NewReview from "../CreateReview";
 import DeleteReviewModal from "../DeleteReview";
+import ToastsOptions from "../Toasts";
+import ReviewTile from "../ReviewTile";
 import { logout } from "../../store/session";
 import { loadReviews } from "../../store/review";
 import './BeerShow.css'
@@ -20,7 +22,6 @@ const BeerShow = ({venue}) => {
     const reviews = Object.values(allReviews)
     const sessionUser = useSelector((state) => state.session.user)
     const dispatch = useDispatch()
-    console.log(venue)
     
     useEffect(() => {
         dispatch(beerDetails(beerId))
@@ -79,35 +80,7 @@ const BeerShow = ({venue}) => {
             </div>
             <ul className="review-list">
                 {reviews.map((review) => (
-                    <div className="reviews">
-                        <h2 className="user">{review.user.username}</h2>
-                        <p>{review.text}</p>
-                        <div className="rating-show">
-                        <div className={review.rating >= 1 ? "filled" : "empty"}>
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        </div>
-                        <div className={review.rating >= 2 ? "filled" : "empty"}>
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        </div>
-                        <div className={review.rating >= 3 ? "filled" : "empty"}>
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        </div>
-                        <div className={review.rating >= 4 ? "filled" : "empty"}>
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        </div>
-                        <div className={review.rating >= 5 ? "filled" : "empty"}>
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        </div>
-                        </div>
-                        <img src={review.photo}/>
-                        {sessionUser.id === review.user_id &&
-                        <div className="create-btn">
-                        <OpenModalButton buttonText={'Edit Review'} modalComponent={<NewReview type='Update Review' beer={beer} review={review}/>} />
-                        <OpenModalButton buttonText={'Delete Review'} modalComponent={<DeleteReviewModal review={review}/>} />
-                        </div>
-                        }  
-                       
-                    </div>
+                    <ReviewTile beer={beer} review={review}/>
                 ))}
             </ul>
             </div>
