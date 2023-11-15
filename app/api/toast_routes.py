@@ -16,7 +16,7 @@ def get_review_toasts(id):
         toast_list.append(toast_dict)
     return {"Toasts": toast_list}
 
-@toast_bp.route('/review/<int:id>', methods=['POST'])
+@toast_bp.route('/review/<int:id>/new', methods=['POST'])
 def toast_review(id):
     review = Review.query.get_or_404(id)
     user_id = request.get_json().get('user_id')
@@ -27,18 +27,19 @@ def toast_review(id):
             db.session.add(toast)
             db.session.commit()
             return (toast.to_dict())
-        return "Post already liked"
+        return jsonify("Post already liked")
     return "User must be logged in", 400
 
-@toast_bp.route('/review/<int:id>', methods=['DELETE'])
+@toast_bp.route('/review/<int:id>/delete', methods=['DELETE'])
 def untoast_review(id):
     review = Review.query.get_or_404(id)
     user_id = request.get_json().get('user_id')
     if user_id:
         toast = Toast.query.filter_by(user_id=user_id, review_id=id).first()
         if toast:
+            toast_id = toast.id
             db.session.delete(toast)
             db.session.commit()
-            return "Toast has been removed"
+            return jsonify(toast_id)
         return "Toast not found", 404
     return "User must be logged in", 400

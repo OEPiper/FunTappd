@@ -9,10 +9,18 @@ import DeleteReviewModal from "../DeleteReview";
 import ToastsOptions from "../Toasts";
 import { logout } from "../../store/session";
 import { loadReviews } from "../../store/review";
+import { loadToasts } from "../../store/toast";
 
 
 const ReviewTile = ({beer, review}) => {
     const sessionUser = useSelector((state) => state.session.user)
+    const allReviews = useSelector((state) => state.review ? state.review : [])
+    const reviews = Object.values(allReviews)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(loadReviews(beer.id))
+        // dispatch(loadToasts(review.id))
+    }, [beer])
     return(
         <div className="reviews">
         <h2 className="user">{review.user.username}</h2>

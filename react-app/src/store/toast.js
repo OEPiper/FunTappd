@@ -36,7 +36,7 @@ export const loadToasts = (reviewId) => async(dispatch) => {
 }
 
 export const addToast = (review_id, user_id) => async(dispatch) => {
-    const res = await fetch(`/api/toasts/review/${review_id}`, {
+    const res = await fetch(`/api/toasts/review/${review_id}/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({user_id: user_id})
@@ -51,7 +51,7 @@ export const addToast = (review_id, user_id) => async(dispatch) => {
 }
 
 export const removeToast = (review_id, user_id) => async(dispatch) => {
-    const res = await fetch(`/api/toasts/review/${review_id}`, {
+    const res = await fetch(`/api/toasts/review/${review_id}/delete`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({user_id: user_id})
@@ -77,8 +77,10 @@ const toastReducer = (state = initialState, action) => {
             })
             return toastsState
         case RECIEVE_TOAST:
+            console.log(action)
             return {...state, [action.toast.id]: action.toast}
         case REMOVE_TOAST:
+            console.log(action)
             const newState = {...state};
             delete newState[action.toastId];
             return newState
