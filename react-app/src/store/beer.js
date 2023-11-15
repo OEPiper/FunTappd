@@ -103,6 +103,10 @@ export const deleteBeer = (data) => async(dispatch) => {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json'}
     })
+    if(res.ok){
+        dispatch(actionRemoveBeer(data))
+        return deleteBeer
+    }
 }
 
 const initialState = {}

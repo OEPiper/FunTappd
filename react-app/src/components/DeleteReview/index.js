@@ -13,7 +13,7 @@ const DeleteReviewModal = ({review}) =>{
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteReview(review.id));
-        dispatch(loadReviews(review.beer_id))
+        // dispatch(loadReviews(review.beer_id))
         // history.push(`/beers/${review.beer_id}`)
         closeModal()
     }

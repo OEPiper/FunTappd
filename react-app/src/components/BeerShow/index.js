@@ -26,7 +26,7 @@ const BeerShow = ({venue}) => {
     useEffect(() => {
         dispatch(beerDetails(beerId))
         dispatch(loadReviews(beerId))
-    }, [dispatch, beerId])
+    }, [beerId])
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());

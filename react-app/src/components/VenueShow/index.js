@@ -22,7 +22,7 @@ const VenueShow = () => {
     useEffect(() => {
         dispatch(venueDetails(venueId))
         dispatch(loadBeers(venueId))
-    }, [dispatch, venueId, beers.length])
+    }, [dispatch, venueId])
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());

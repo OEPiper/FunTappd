@@ -86,12 +86,10 @@ export const updateReview = (data) => async(dispatch) => {
 }
 
 export const deleteReview = (data) => async(dispatch) => {
-    console.log('response3')
     const res = await fetch(`/api/reviews/${data}/delete`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json'}
     })
-    console.log('response2')
     if(res.ok){
         console.log('response1')
         // const deleteReview = await res.json()
@@ -108,6 +106,7 @@ const initialState = {}
 const reviewReducer = (state = initialState, action) => {
     switch (action.type){
         case LOAD_REVIEWS:
+            // console.log(action.reviews, "review reducer")
             const reviewsState = {};
             const reviewsAction = action.reviews
             reviewsAction.Reviews.forEach((review) => {
@@ -119,7 +118,7 @@ const reviewReducer = (state = initialState, action) => {
         case UPDATE_REVIEW:
             return {...state, [action.review.id]: action.review}
         case REMOVE_REVIEW:
-            console.log('response4')
+            console.log(action.reviewId)
             const newState = {...state};
             delete newState[action.reviewId];
             return newState

@@ -76,4 +76,4 @@ def delete_review(id):
         return "Review not Found", 404
     db.session.delete(review_to_remove)
     db.session.commit()
-    return "Review has been removed"
+    return jsonify(id)

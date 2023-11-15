@@ -6,26 +6,38 @@ import { reviewDetails } from "../../store/review";
 import './Toasts.css'
 
 const ToastsOptions = ({review}) => {
-    const [toasted, setToasted] = useState(false)
-    const [render, setRender] = useState(false)
+    // console.log(review, "review")
+    const [toasted, setToasted] = useState(true)
+    // const [render, setRender] = useState(false)
     const sessionUser = useSelector((state) => state.session.user)
-    
+    const toastObj = useSelector((state) => state.toast? state.toast : [])
+    const allToasts = Object.values(toastObj)
+    const reviewToasts = []
+    const toastedUser = []
+    allToasts.forEach((toast) => { 
+        if(toast.review_id === review.id){
+            reviewToasts.push(toast)
+            if(sessionUser.id === toast.user_id){
+                toastedUser.push(toast)
+            }
+        }
+    })
+    // console.log(allToasts, `${review.id}`, "all---------toasts")
     const dispatch = useDispatch()
     
     useEffect(() => {
         dispatch(loadToasts(review.id))
         // dispatch(reviewDetails(review.id))
-        const toastedUser = review.toasts.filter(toast => sessionUser.id === toast.user_id)
-        console.log('toastedUser',toastedUser, `${review.id}`)
+        // const toastedUser = reviewToasts.filter(toast => sessionUser.id === toast.user_id)
+        console.log('toastedUser',toastedUser, `${review.id}`, reviewToasts)
         if(toastedUser.length > 0){
-            console.log('toasted to true')
             setToasted(true)
         }else{
             setToasted(false)
         }
-    },[toasted, render])
+    },[dispatch, review.id])
     
-    console.log(toasted, `${review.id}`)
+    // console.log(toasted, `${review.id}`)
     const handleToast = () => {
         // e.preventDefault()
         if(sessionUser){
@@ -40,7 +52,7 @@ const ToastsOptions = ({review}) => {
                 dispatch(addToast(review_id, user_id))
                 
             }
-            setRender(!render);
+            setToasted(!toasted);
         }
     }
 
@@ -49,7 +61,7 @@ const ToastsOptions = ({review}) => {
     // },[])
     return(
         <div>
-            <p className="total-toasts">{review.toasts.length} <i className="fa-solid fa-beer-mug-empty"></i></p>
+            <p className="total-toasts">{reviewToasts.length} <i className="fa-solid fa-beer-mug-empty"></i></p>
             {sessionUser &&
             <button className={toasted ? 'isToasted' : 'notToasted' } onClick={handleToast}>
                <i className="fa-solid fa-beer-mug-empty"></i> Toast
