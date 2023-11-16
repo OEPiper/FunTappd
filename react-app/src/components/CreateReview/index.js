@@ -108,6 +108,8 @@ const NewReview = ({beer, review, type}) =>{
                 placeholder="Leave a review here(2000 character limit)"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                rows={5}
+                cols={25}
                 />
                  </label>
                  {error && 

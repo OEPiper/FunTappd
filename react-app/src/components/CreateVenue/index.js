@@ -83,14 +83,6 @@ const NewVenue = ({venue, type}) =>{
             </label>
             {error && 
             <p>{error}</p>}
-            <label className="review-text">
-                Your Story:
-                <textarea 
-                placeholder="Tell us about your brewery(2000 character limit)"
-                value={story}
-                onChange={(e) => setStory(e.target.value)}
-                />
-                 </label>
             <label>
                 Location:
                 <input 
@@ -100,7 +92,7 @@ const NewVenue = ({venue, type}) =>{
                 onChange={(e) => setLocation(e.target.value)}
                 />
             </label>
-            {type === 'Create a Venue' &&
+                {type === 'Create a Venue' &&
             <label>
                 Logo:
                 <input
@@ -110,6 +102,16 @@ const NewVenue = ({venue, type}) =>{
                 />
             </label>
             }
+            <label className="review-text">
+                Your Story:
+                <textarea 
+                placeholder="Tell us about your brewery(2000 character limit)"
+                value={story}
+                onChange={(e) => setStory(e.target.value)}
+                rows={5}
+                cols={30}
+                />
+                 </label>
             {(imageLoading)&& <p>Loading...</p>}
             </div>
             <button type='submit' disabled={disable} className='submit-button'>{submitText}</button>

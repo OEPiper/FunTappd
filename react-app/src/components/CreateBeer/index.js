@@ -122,14 +122,6 @@ const NewBeer = ({venue, beer, formType}) => {
                 onChange={(e) => setIbu(e.target.value)}
                 />
             </label>
-            <label className="review-text">
-                Description:
-                <textarea 
-                placeholder="Tell us about your beer(2000 character limit)"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                />
-                 </label>
                  {formType === 'Create a Beer' &&
             <label>
                 Photo:
@@ -140,6 +132,16 @@ const NewBeer = ({venue, beer, formType}) => {
                 />
             </label>
             }
+            <label className="review-text">
+                Description:
+                <textarea 
+                placeholder="Tell us about your beer(2000 character limit)"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={5}
+                cols={25}
+                />
+                 </label>
             </div>
             {(imageLoading)&& <p>Loading...</p>}
             <button type='submit' disabled={disable} className='submit-button'>{submitText}</button>
