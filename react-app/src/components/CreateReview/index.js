@@ -58,13 +58,15 @@ const NewReview = ({beer, review, type}) =>{
     return (
         <form onSubmit={handleSubmit} className="create-form" encType="multipart/form-data" >
             <h2>{type}</h2>
+            <div className="inputs">
+
             <div className="rating-input">
                 <div
                     className={rating >= 1 ? "filled" : "empty"}
                     // onMouseEnter={() => {  setStars(1)} }
                     //onMouseLeave={() => {  setStars(0)} }
                     onClick={() => {  setRating(1)} }
-                >
+                    >
                     <i class="fa-solid fa-beer-mug-empty"></i>
                 </div>
                 <div
@@ -72,7 +74,7 @@ const NewReview = ({beer, review, type}) =>{
                     // onMouseEnter={() => {  setStars(1)} }
                     //onMouseLeave={() => {  setStars(0)} }
                     onClick={() => {  setRating(2)} }
-                >
+                    >
                     <i class="fa-solid fa-beer-mug-empty"></i>
                 </div>
                 <div
@@ -80,7 +82,7 @@ const NewReview = ({beer, review, type}) =>{
                     // onMouseEnter={() => {  setStars(1)} }
                     //onMouseLeave={() => {  setStars(0)} }
                     onClick={() => {  setRating(3)} }
-                >
+                    >
                     <i class="fa-solid fa-beer-mug-empty"></i>
                 </div>
                 <div
@@ -88,7 +90,7 @@ const NewReview = ({beer, review, type}) =>{
                     // onMouseEnter={() => {  setStars(1)} }
                     //onMouseLeave={() => {  setStars(0)} }
                     onClick={() => {  setRating(4)} }
-                >
+                    >
                     <i class="fa-solid fa-beer-mug-empty"></i>
                 </div>
                 <div
@@ -96,7 +98,7 @@ const NewReview = ({beer, review, type}) =>{
                     // onMouseEnter={() => {  setStars(1)} }
                     //onMouseLeave={() => {  setStars(0)} }
                     onClick={() => {  setRating(5)} }
-                >
+                    >
                     <i class="fa-solid fa-beer-mug-empty"></i>
                 </div>
                 </div>
@@ -120,6 +122,7 @@ const NewReview = ({beer, review, type}) =>{
                 />
             </label>
             }
+            </div>
            <button type='submit' disabled={disable} className='submit-button'>{type}</button> 
         </form>
     )

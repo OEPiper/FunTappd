@@ -82,8 +82,10 @@ const NewBeer = ({venue, beer, formType}) => {
     return (
         <form onSubmit={handleSubmit} className="create-form">
             <h2>{formType}</h2>
+            <div className="inputs">
+
             <label>
-                Name
+                Name: 
                 <input 
                 type='text'
                 placeholder="name"
@@ -94,7 +96,7 @@ const NewBeer = ({venue, beer, formType}) => {
             {error && 
             <p>{error}</p>}
             <label>
-                Beer Type
+                Beer Type: 
                 <input 
                 type='text'
                 placeholder="Type"
@@ -103,7 +105,7 @@ const NewBeer = ({venue, beer, formType}) => {
                 />
             </label>
             <label>
-                ABV
+                ABV: 
                 <input 
                 type='number'
                 placeholder="ABV"
@@ -112,7 +114,7 @@ const NewBeer = ({venue, beer, formType}) => {
                 />
             </label>
             <label>
-                IBU
+                IBU: 
                 <input
                 type="number"
                 placeholder="IBU"
@@ -138,6 +140,7 @@ const NewBeer = ({venue, beer, formType}) => {
                 />
             </label>
             }
+            </div>
             {(imageLoading)&& <p>Loading...</p>}
             <button type='submit' disabled={disable} className='submit-button'>{submitText}</button>
         </form>

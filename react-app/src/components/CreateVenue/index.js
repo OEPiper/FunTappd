@@ -70,6 +70,8 @@ const NewVenue = ({venue, type}) =>{
     return (
         <form onSubmit={handleSubmit} className="create-form" encType="multipart/form-data">
             <h2>{type}</h2>
+            <div className="inputs">
+
             <label>
                 Name:
                 <input 
@@ -109,6 +111,7 @@ const NewVenue = ({venue, type}) =>{
             </label>
             }
             {(imageLoading)&& <p>Loading...</p>}
+            </div>
             <button type='submit' disabled={disable} className='submit-button'>{submitText}</button>
         </form>
     )

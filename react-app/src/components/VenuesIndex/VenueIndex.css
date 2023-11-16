@@ -32,10 +32,6 @@
     color: black;
 }
 
-.venue-card a>p{
-    display: flex;
-    justify-content: center;
-}
 
 .profile-options{
     border-left: solid 5px #ffc000;

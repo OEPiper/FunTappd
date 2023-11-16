@@ -50,3 +50,7 @@
     padding: 5px 15px;
 }
 
+input {
+    width: fit-content;
+}
+
